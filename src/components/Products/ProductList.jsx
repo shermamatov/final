@@ -81,23 +81,19 @@ const Books = () => {
                                         name: "sort",
                                     }}
                                     size="small"
-                                    // fullWidth
+                                    onChange={(e) =>
+                                        testData("type", e.target.value)
+                                    }
                                 >
-                                    <MenuItem value={"All"}>все жанры</MenuItem>
-                                    <MenuItem value={"Фантастика"}>
-                                        Фантастика
+                                    <MenuItem value={"All"}>все</MenuItem>
+                                    <MenuItem value={"детектив"}>
+                                        детектив
                                     </MenuItem>
-                                    <MenuItem value={"Катастрофа"}>
-                                        Катастрофа
+                                    <MenuItem value={"приключения"}>
+                                        приключения
                                     </MenuItem>
-                                    <MenuItem value={"Боевик"}>Боевик</MenuItem>
-                                    <MenuItem value={"Спорт"}>Спорт</MenuItem>
-                                    <MenuItem value={"Биография"}>
-                                        Биография
-                                    </MenuItem>
-                                    <MenuItem value={"Драма"}>Драма</MenuItem>
-                                    <MenuItem value={"Комедия"}>
-                                        комедия
+                                    <MenuItem value={"романтика"}>
+                                        романтика
                                     </MenuItem>
                                 </Select>
                             </FormControl>
@@ -126,12 +122,8 @@ const Books = () => {
                                     <MenuItem value={"All"}>
                                         сортировать
                                     </MenuItem>
-                                    <MenuItem value={"asc"}>
-                                        сначала старые
-                                    </MenuItem>
-                                    <MenuItem value={"desc"}>
-                                        сначала новые
-                                    </MenuItem>
+                                    <MenuItem value={"asc"}>дешевле</MenuItem>
+                                    <MenuItem value={"desc"}>дороже</MenuItem>
                                 </Select>
                             </FormControl>
                         </Box>

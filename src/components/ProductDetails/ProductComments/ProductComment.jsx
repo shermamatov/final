@@ -79,6 +79,7 @@ const ProductComment = () => {
                     <Button
                         onClick={() => {
                             handleComment();
+                            setCommentState("");
                         }}
                         sx={{
                             width: "100%",

@@ -2,6 +2,7 @@ import { Box, TextField, Typography } from "@mui/material";
 import React from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useAuth } from "../../contexts/AuthContextProvider";
+import { useNavigate } from "react-router-dom";
 const Auth = () => {
     const {
         email,
@@ -24,6 +25,7 @@ const Auth = () => {
             password: data.get("password"),
         });
     };
+    const navigate = useNavigate();
     return (
         <div>
             <Box
@@ -92,6 +94,7 @@ const Auth = () => {
                         }}
                         onClick={() => {
                             handleLogin();
+                            navigate("/products");
                         }}
                     >
                         войти
