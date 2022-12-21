@@ -80,7 +80,7 @@ const Admin = () => {
                 <input
                     className="adminInp"
                     placeholder="price"
-                    type="text"
+                    type="number"
                     onChange={(e) => setPrice(e.target.value)}
                 />
                 <FormControl>
