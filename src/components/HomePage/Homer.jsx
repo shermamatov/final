@@ -1,6 +1,8 @@
 import { Box, Slider } from "@mui/material";
 import React from "react";
+import HomeHitBook from "./HomeProduct/HomeHitBook";
 import HomeNewBook from "./HomeProduct/HomeNewBook";
+import HomeSoonBook from "./HomeProduct/HomeSoonBook";
 import HomeSlider from "./Slider/HomeSlider";
 
 const HomePage = () => {
@@ -22,6 +24,8 @@ const HomePage = () => {
             </Box>
             <HomeSlider />
             <HomeNewBook />
+            <HomeHitBook />
+            <HomeSoonBook />
         </div>
     );
 };

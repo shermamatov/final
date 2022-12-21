@@ -1,0 +1,15 @@
+.adminInp {
+    height: 40px;
+    padding-left: 10px;
+}
+.adminArea {
+    height: 80px;
+    padding: 10px;
+}
+.addBtn {
+    height: 40px;
+    border: none;
+    background-color: #037fe0;
+    color: white;
+    font-size: 20px;
+}

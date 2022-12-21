@@ -67,7 +67,7 @@ const Auth = () => {
                     <TextField
                         style={{
                             width: "100%",
-                            marginBottom: "30px",
+                            marginBottom: "60px",
                             paddingLeft: "10px",
                             height: "40px",
                         }}
@@ -75,7 +75,7 @@ const Auth = () => {
                         placeholder="password"
                         autoComplete="current-password"
                         value={password}
-                        type="text"
+                        type="password"
                         helperText={passwordError}
                         onChange={(e) => {
                             setPassword(e.target.value);
