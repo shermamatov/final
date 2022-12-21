@@ -6,16 +6,26 @@ import {
     Select,
     Typography,
 } from "@mui/material";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { testArr } from "../../Consts";
 import { bookContext } from "../../contexts/BookContext";
+import PaginationComp from "./Pagination";
 import ProductCard from "./ProductCard";
 
 const Books = () => {
-    const { getData, data } = useContext(bookContext);
+    const { getData, data, testData, testSort } = useContext(bookContext);
     useEffect(() => {
         getData();
     }, []);
+    const [page, setPage] = useState(1);
+    const itemsPerPage = 6;
+    const count = Math.ceil(data.length / itemsPerPage);
+
+    function currentData() {
+        const begin = (page - 1) * itemsPerPage;
+        const end = begin + itemsPerPage;
+        return data.slice(begin, end);
+    }
     const theme = createTheme({
         breakpoints: {
             values: {
@@ -111,6 +121,7 @@ const Books = () => {
                                     }}
                                     size="small"
                                     fullWidth
+                                    onChange={(e) => testSort(e.target.value)}
                                 >
                                     <MenuItem value={"All"}>
                                         сортировать
@@ -139,32 +150,35 @@ const Books = () => {
                             }}
                         >
                             <Typography
+                                onClick={() => testData("type", "All")}
                                 variant="h6"
                                 sx={{
                                     fontSize: "13.5px",
                                     color: "#037fe0",
                                     fontFamily: "sans-serif",
-                                    marginLeft: "10px",
-                                    marginBottom: "15px",
                                     borderBottom: "1px solid #E3E3E3",
+                                    marginBottom: "15px",
+                                    marginLeft: "10px",
                                 }}
                             >
-                                Художественная литература
+                                все
                             </Typography>
                             <Typography
                                 variant="h6"
+                                onClick={() => testData("type", "детектив")}
                                 sx={{
                                     fontSize: "13.5px",
                                     color: "#037fe0",
                                     fontFamily: "sans-serif",
-                                    borderBottom: "1px solid #E3E3E3",
-                                    marginBottom: "15px",
                                     marginLeft: "10px",
+                                    marginBottom: "15px",
+                                    borderBottom: "1px solid #E3E3E3",
                                 }}
                             >
-                                Литература для детей
+                                детектив
                             </Typography>
                             <Typography
+                                onClick={() => testData("type", "приключения")}
                                 variant="h6"
                                 sx={{
                                     fontSize: "13.5px",
@@ -175,9 +189,10 @@ const Books = () => {
                                     marginLeft: "10px",
                                 }}
                             >
-                                Искусство
+                                приключения
                             </Typography>
                             <Typography
+                                onClick={() => testData("type", "романтика")}
                                 variant="h6"
                                 sx={{
                                     fontSize: "13.5px",
@@ -188,46 +203,7 @@ const Books = () => {
                                     marginLeft: "10px",
                                 }}
                             >
-                                Бизнес, экономика и право
-                            </Typography>
-                            <Typography
-                                variant="h6"
-                                sx={{
-                                    fontSize: "13.5px",
-                                    color: "#037fe0",
-                                    fontFamily: "sans-serif",
-                                    borderBottom: "1px solid #E3E3E3",
-                                    marginBottom: "15px",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                Компьютерная литература
-                            </Typography>
-                            <Typography
-                                variant="h6"
-                                sx={{
-                                    fontSize: "13.5px",
-                                    color: "#037fe0",
-                                    fontFamily: "sans-serif",
-                                    borderBottom: "1px solid #E3E3E3",
-                                    marginBottom: "15px",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                Психология и эзотерика
-                            </Typography>
-                            <Typography
-                                variant="h6"
-                                sx={{
-                                    fontSize: "13.5px",
-                                    color: "#037fe0",
-                                    fontFamily: "sans-serif",
-                                    borderBottom: "1px solid #E3E3E3",
-                                    marginLeft: "10px",
-                                    marginBottom: "15px",
-                                }}
-                            >
-                                Научная литература
+                                романтика
                             </Typography>
                         </Box>
                     </Box>
@@ -244,25 +220,27 @@ const Books = () => {
                         }}
                         className="scrollBox"
                     >
-                        {data.map((item) => (
-                            <Box
-                                key={item.id}
-                                sx={{
-                                    width: "30%",
-                                    [theme.breakpoints.down("tm")]: {
-                                        width: "45%",
-                                    },
-                                }}
-                            >
-                                <ProductCard item={item} />
-                            </Box>
-                        ))}
+                        {data &&
+                            currentData().map((item) => (
+                                <Box
+                                    key={item.id}
+                                    sx={{
+                                        width: "30%",
+                                        [theme.breakpoints.down("tm")]: {
+                                            width: "45%",
+                                        },
+                                    }}
+                                >
+                                    <ProductCard item={item} />
+                                </Box>
+                            ))}
                         {/* {data &&
                     data.map((item) => (
                         <ProductCard item={item} key={item.id} />
                     ))} */}
                     </Box>
                 </Box>
+                <PaginationComp page={page} setPage={setPage} count={count} />
             </Box>
         </div>
     );

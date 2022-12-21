@@ -3,7 +3,7 @@ import React from "react";
 import HomeCard from "./HomeCard";
 import "./Home.css";
 import { Typography } from "@mui/material";
-const HomeNewBook = () => {
+const HomeSoonBook = () => {
     const newBook = [
         {
             title: "Болотная Тварь. Книга 2",
@@ -71,7 +71,7 @@ const HomeNewBook = () => {
                     margin: "50px auto 30px",
                 }}
             >
-                новинки
+                скоро...
             </Typography>
             <Box
                 sx={{
@@ -90,4 +90,4 @@ const HomeNewBook = () => {
     );
 };
 
-export default HomeNewBook;
+export default HomeSoonBook;

@@ -1,47 +1,117 @@
+import { Box, FormControl, MenuItem, Select, Typography } from "@mui/material";
 import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { bookContext } from "../../contexts/BookContext";
-// import "./Admin.css";
+import "./Admin.css";
+import sorry from "../../img/oc2.jpg";
 const Admin = () => {
     const [name, setName] = useState("");
     const [autor, setAutor] = useState("");
     const [price, setPrice] = useState(0);
     const [disc, setDisc] = useState("");
-    const [img, setImg] = useState("");
+    const [img, setImg] = useState(sorry);
+    const [type, setType] = useState("");
     const { addData } = useContext(bookContext);
+    const navigate = useNavigate();
     function handleData() {
-        let obj = { name, autor, price, disc, img };
+        if (!name || !autor || !disc || !type) {
+            alert("заполните все поля");
+            return;
+        }
+        let obj = {
+            name,
+            autor,
+            price: +price,
+            disc,
+            img,
+            type,
+            rating: [],
+            like: [],
+            comments: [],
+        };
         addData(obj);
-        console.log(obj);
+        navigate("/products");
     }
     return (
-        <div>
-            <input
-                placeholder="book name"
-                type="text"
-                onChange={(e) => setName(e.target.value)}
-            />
-            <input
-                placeholder="autor name"
-                type="text"
-                onChange={(e) => setAutor(e.target.value)}
-            />
-            <input
-                placeholder="price"
-                type="text"
-                onChange={(e) => setPrice(e.target.value)}
-            />
-            <input
-                placeholder="disc"
-                type="text"
-                onChange={(e) => setDisc(e.target.value)}
-            />
-            <input
-                placeholder="img"
-                type="text"
-                onChange={(e) => setImg(e.target.value)}
-            />
-            <button onClick={handleData}>add</button>
-        </div>
+        <Box sx={{ width: "100vw", height: "70vh", textAlign: "center" }}>
+            <Typography variant="h3" sx={{ marginBottom: "30px" }}>
+                админ панель
+            </Typography>
+            <Box
+                sx={{
+                    width: "50%",
+                    margin: "auto",
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr",
+                    gridGap: "10px",
+                }}
+            >
+                <input
+                    placeholder="book name"
+                    className="adminInp"
+                    type="text"
+                    onChange={(e) => setName(e.target.value)}
+                />
+                <input
+                    className="adminInp"
+                    placeholder="autor name"
+                    type="text"
+                    onChange={(e) => setAutor(e.target.value)}
+                />
+
+                <input
+                    className="adminInp"
+                    placeholder="document"
+                    type="text"
+                />
+                <input
+                    className="adminInp"
+                    placeholder="img"
+                    type="text"
+                    onChange={(e) => setImg(e.target.value)}
+                />
+                <textarea
+                    className="adminArea"
+                    style={{ gridColumn: "1/3" }}
+                    placeholder="disc"
+                    type="text"
+                    onChange={(e) => setDisc(e.target.value)}
+                />
+                <input
+                    className="adminInp"
+                    placeholder="price"
+                    type="text"
+                    onChange={(e) => setPrice(e.target.value)}
+                />
+                <FormControl>
+                    <Select
+                        onChange={(e) => setType(e.target.value)}
+                        defaultValue={"All"}
+                        sx={{ width: "100%" }}
+                        inputProps={{
+                            name: "sort",
+                        }}
+                        size="small"
+                    >
+                        <MenuItem value={"All"}>все жанры</MenuItem>
+                        <MenuItem value={"детектив"}>детектив</MenuItem>
+                        <MenuItem value={"романтика"}>Любовный роман</MenuItem>
+                        <MenuItem value={"приключения"}>Приключения</MenuItem>
+                        <MenuItem value={"научная"}>научная</MenuItem>
+                    </Select>
+                </FormControl>
+
+                <button
+                    className="addBtn"
+                    style={{ gridColumn: "1/3" }}
+                    onClick={() => {
+                        handleData();
+                    }}
+                >
+                    добавить
+                </button>
+            </Box>
+        </Box>
     );
 };
 

@@ -1,10 +1,15 @@
 import { Box } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContextProvider";
 import "./Navbar.css";
 
 const DownNavbar = () => {
     const navigate = useNavigate();
+    const {
+        user: { email },
+    } = useAuth();
+    const ADMIN = "admin@gmail.com";
     return (
         <Box
             sx={{
@@ -13,6 +18,7 @@ const DownNavbar = () => {
                 height: { md: "40px", xs: "30px" },
                 marginTop: "10px",
                 borderBottom: "1px solid #E3E3E3",
+                marginBottom: "30px",
             }}
         >
             <Box
@@ -25,7 +31,7 @@ const DownNavbar = () => {
                 <Box
                     sx={{
                         width: {
-                            lg: "50%",
+                            lg: "70%",
                             sm: "90%",
                         },
                         display: "flex",
@@ -48,6 +54,23 @@ const DownNavbar = () => {
                     >
                         книги
                     </button>
+                    {email === ADMIN && (
+                        <button
+                            style={{
+                                // width: "7%",
+                                height: "90%",
+                                border: "none",
+                                backgroundColor: "transparent",
+                                fontWeight: "light",
+                                marginLeft: "50px",
+                            }}
+                            className="navButton"
+                            onClick={() => navigate("/admin")}
+                        >
+                            добавить
+                        </button>
+                    )}
+
                     <button
                         style={{
                             // width: "7%",
@@ -58,9 +81,25 @@ const DownNavbar = () => {
                             marginLeft: "50px",
                         }}
                         className="navButton"
-                        onClick={() => navigate("/admin")}
+                        onClick={() => {
+                            email ? navigate("/wish") : navigate("/auth");
+                        }}
                     >
-                        добавить
+                        избранное
+                    </button>
+                    <button
+                        style={{
+                            // width: "7%",
+                            height: "90%",
+                            border: "none",
+                            backgroundColor: "transparent",
+                            fontWeight: "light",
+                            marginLeft: "50px",
+                        }}
+                        className="navButton"
+                        onClick={() => navigate("/cart")}
+                    >
+                        корзина
                     </button>
                     <button
                         style={{
@@ -73,33 +112,7 @@ const DownNavbar = () => {
                         }}
                         className="navButton"
                     >
-                        книги
-                    </button>
-                    <button
-                        style={{
-                            // width: "7%",
-                            height: "90%",
-                            border: "none",
-                            backgroundColor: "transparent",
-                            fontWeight: "light",
-                            marginLeft: "50px",
-                        }}
-                        className="navButton"
-                    >
-                        книги
-                    </button>
-                    <button
-                        style={{
-                            // width: "7%",
-                            height: "90%",
-                            border: "none",
-                            backgroundColor: "transparent",
-                            fontWeight: "light",
-                            marginLeft: "50px",
-                        }}
-                        className="navButton"
-                    >
-                        книги
+                        комьюнити
                     </button>
                 </Box>
             </Box>

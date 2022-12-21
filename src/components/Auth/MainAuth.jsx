@@ -5,6 +5,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Auth from "./Auth";
+import Register from "./Register";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -68,12 +69,12 @@ export default function BasicTabs() {
                 >
                     <Tab
                         sx={{ width: "50%" }}
-                        label="Item One"
+                        label="войти"
                         {...a11yProps(0)}
                     />
                     <Tab
                         sx={{ width: "50%" }}
-                        label="Item Two"
+                        label="регистрация"
                         {...a11yProps(1)}
                     />
                 </Tabs>
@@ -82,7 +83,7 @@ export default function BasicTabs() {
                 <Auth />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                Item Two
+                <Register />
             </TabPanel>
         </Box>
     );

@@ -1,31 +1,28 @@
-import { Box, Button, createTheme, Typography } from "@mui/material";
-import React, { useContext, useEffect } from "react";
+import { Box, Typography } from "@mui/material";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { bookContext } from "../../contexts/BookContext";
 import { cartContext } from "../../contexts/CartContext";
 import { wishContext } from "../../contexts/WishContext";
-import imgTimur from "../../img/timurPhoto.jpg";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
-import { useAuth } from "../../contexts/AuthContextProvider";
-const ProductCard = ({ item }) => {
-    const { addToCart } = useContext(cartContext);
-    const { addToWish, getWish } = useContext(wishContext);
-    const { prover, prover2 } = useContext(bookContext);
-    const navigate = useNavigate();
-    useEffect(() => {
-        getWish();
-    }, []);
 
+const WishCard = ({ item }) => {
+    const navigate = useNavigate();
+    const { addToCart } = useContext(cartContext);
+    const { addToWish } = useContext(wishContext);
+    const { prover, prover2 } = useContext(bookContext);
     return (
         <div>
             <Box
                 onClick={() => navigate(`/product/${item.id}`)}
                 sx={{
+                    // border: "1px solid #E3E3E3",
+                    // marginRight: "20px",
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
-                    height: { lg: "400px", md: "350px" },
+                    height: { md: "350px" },
                     padding: { sm: "1.25rem", xs: "0.7rem" },
                     width: "100%",
                     marginBottom: "20px",
@@ -102,4 +99,4 @@ const ProductCard = ({ item }) => {
     );
 };
 
-export default ProductCard;
+export default WishCard;
